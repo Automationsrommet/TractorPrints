@@ -1,0 +1,42 @@
+tapdia=5;
+pinchfromtap=8;
+sleeve=15;
+body=3;
+collar=1;
+
+WhatYouWant();
+
+module WhatYouWant(){    
+    mainpinch();
+    collars();     
+}
+module collars(){
+    for(i=[-1:2:1]){
+    translate([0,0,i*(sleeve/2+collar/2)])intersection(){
+    cube([tapdia+2*body+2*collar,pinchfromtap*5,collar],center=true);
+    profile(body+collar);
+    }
+}
+}
+module mainpinch(){
+   intersection(){
+    cube([tapdia+2*body,pinchfromtap*5,sleeve],center=true);
+    profile(body);
+    }
+}
+module profile(anybody){
+  difference(){
+   minkowski(){
+      cutout();
+       cylinder(1,anybody,anybody,center=true);
+   }
+  cutout(); 
+   }  
+}
+module cutout(){
+cylinder(sleeve+1,tapdia/2,tapdia/2,center=true,$fn=30);
+translate([-tapdia/4,pinchfromtap,0])cube([tapdia/2,pinchfromtap*2+tapdia/2,sleeve+1],center=true);
+rotate([0,0,12])translate([tapdia/4,pinchfromtap/2,0])cube([tapdia/2,pinchfromtap+tapdia/2,sleeve+1],center=true);
+rotate([0,0,-12])translate([-tapdia/2,pinchfromtap*1.5,0])cube([tapdia/2,pinchfromtap+tapdia/2,sleeve+1],center=true);
+translate([0,pinchfromtap*2+sleeve/2,0])rotate([0,0,45])cube(sleeve,center=true);
+}
