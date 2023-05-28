@@ -1,8 +1,8 @@
-tapdia=5;
+tapdia=6;
 pinchfromtap=8;
-sleeve=15;
-body=3;
-collar=1;
+sleeve=20;
+body=1.5;
+collar=2;
 
 WhatYouWant();
 
